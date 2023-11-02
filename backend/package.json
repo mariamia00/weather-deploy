@@ -2,9 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "build/app.js",
+  "main": "built/app.js",
   "scripts": {
-    "start": "node build/app.js",
+    "start": "node built/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebuild": "chmod +x ./node_modules/.bin/tsc",
     "build": "npm install && tsc"

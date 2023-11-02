@@ -5,7 +5,7 @@
     "node": ">=18 <21"
   },
   "description": "a wesbite made by beginners for fun. we display 6 day forecast and weathermap",
-  "main": "build/app.js",
+  "main": "built/app.js",
   "scripts": {
     "dev": "cd frontend && npm start & cd backend && npm start",
     "start": "cd backend/built && node app.ts",
