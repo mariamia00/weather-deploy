@@ -24,6 +24,11 @@ app.use(
 
 const UserModel = mongoose.model("User", UserSchema);
 
+app.use(express.static("public"));
+app.get("*", (req: any, res: any) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/users", userRouter);
 app.use("/api", postRouter);
