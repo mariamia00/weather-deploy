@@ -8,7 +8,7 @@
   "main": "built/app.js",
   "scripts": {
     "dev": "cd frontend && npm start & cd backend && npm start",
-    "start": "cd backend/built && node app.ts",
+    "start": "cd backend/built && node app.js",
     "prebuild": "cd backend && npm run build",
     "build": "cd frontend && npm install && npm run build"
   },
