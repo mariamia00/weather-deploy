@@ -23,6 +23,10 @@ app.use((0, cors_1.default)({
     origin: ["http://localhost:4200"],
 }));
 var UserModel = mongoose_1.default.model("User", user_model_1.UserSchema);
+app.use(express_1.default.static("public"));
+app.get("*", function (req, res) {
+    res.sendFile(path_1.default.join(__dirname, "public", "index.html"));
+});
 app.use("/uploads", express_1.default.static(path_1.default.join(__dirname, "uploads")));
 app.use("/api/users", user_router_1.default);
 app.use("/api", post_router_1.default);
