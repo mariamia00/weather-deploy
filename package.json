@@ -2,7 +2,7 @@
   "name": "vreme-v2",
   "version": "1.0.0",
   "engines": {
-    "node": ">=20 <21"
+    "node": ">=18 <21"
   },
   "description": "a wesbite made by beginners for fun. we display 6 day forecast and weathermap",
   "main": "app.ts",
@@ -13,7 +13,6 @@
     "build": "cd frontend && npm run build"
   },
   "author": "crazy kids 402",
-  "license": "ISC",
   "devDependencies": {
     "typescript": "^5.2.2"
   }
