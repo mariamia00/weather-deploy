@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { COMMENTS_URL } from '../constants/urls';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CommentsService {
   constructor(private http: HttpClient) {}
-  private apiUrl = 'http://localhost:5000/api/comments'; // Base URL for comments
+  private apiUrl = COMMENTS_URL;
 
   addComment(postId: string, text: string) {
     const url = `${this.apiUrl}/images/${postId}/comments`;

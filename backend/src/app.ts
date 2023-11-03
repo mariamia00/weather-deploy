@@ -32,7 +32,6 @@ app.get("*", (req, res) => {
   const filePath = res.sendFile(
     path.join(__dirname, "../../frontend/dist/weather/index.html")
   );
-  console.log("Serving file from path:", filePath);
 });
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
