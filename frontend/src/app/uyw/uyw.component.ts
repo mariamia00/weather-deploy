@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../services/user.service';
 import { CommentsService } from '../services/comments.service';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-uyw',
@@ -36,17 +37,28 @@ export class UywComponent implements OnInit {
       this.userName = user.name;
       this.userId = user.id;
     }
-    this.http.get<any[]>(POST_URL).subscribe((data) => {
-      this.images = data;
+    this.http
+      .get<any[]>(POST_URL)
+      .pipe(
+        catchError((error) => {
+          console.error('Failed to fetch images:', error);
+          this.toastrService.error(
+            'Failed to fetch images. Please try again later.'
+          );
+          return throwError(error);
+        })
+      )
+      .subscribe((data) => {
+        this.images = data;
 
-      for (const post of this.images) {
-        this.commentService
-          .getCommentsForPost(post._id)
-          .subscribe((comments) => {
-            post.comments = comments; // Associate comments with the post
-          });
-      }
-    });
+        for (const post of this.images) {
+          this.commentService
+            .getCommentsForPost(post._id)
+            .subscribe((comments) => {
+              post.comments = comments; // Associate comments with the post
+            });
+        }
+      });
   }
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed;
@@ -60,20 +72,26 @@ export class UywComponent implements OnInit {
       this.toastrService.error('Please select both image and title');
       return;
     }
+
     const formData = new FormData();
     formData.append('image', this.selectedImage);
     formData.append('title', this.imageTitle);
 
-    this.http.post(POST_URL, formData).subscribe(
-      (response) => {
+    this.http
+      .post(POST_URL, formData)
+      .pipe(
+        catchError((error) => {
+          console.error('Failed to upload post:', error);
+          this.toastrService.error(
+            'Failed to upload post. Please try again later.'
+          );
+          return throwError(error);
+        })
+      )
+      .subscribe((response) => {
         this.toastrService.success('Post successfully uploaded');
         this.ngOnInit();
-      },
-      (error) => {
-        console.log(error);
-        this.toastrService.error('Failed to upload post');
-      }
-    );
+      });
   }
   deletePost(postId: string) {
     if (!confirm('Are you sure you want to delete this post?')) {
