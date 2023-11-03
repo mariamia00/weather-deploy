@@ -23,8 +23,12 @@ app.use((0, cors_1.default)({
     origin: ["http://localhost:4200"],
 }));
 var UserModel = mongoose_1.default.model("User", user_model_1.UserSchema);
-app.get("/", function (req, res) {
-    res.sendFile(path_1.default.join(__dirname, "../frontend/dist/weather/index.html"));
+// Serve static files from the Angular dist directory
+app.use(express_1.default.static(path_1.default.join(__dirname, "../../frontend/dist/weather/")));
+// Define a catch-all route that serves your Angular app's index.html
+app.get("*", function (req, res) {
+    var filePath = res.sendFile(path_1.default.join(__dirname, "../../frontend/dist/weather/index.html"));
+    console.log("Serving file from path:", filePath);
 });
 app.use("/uploads", express_1.default.static(path_1.default.join(__dirname, "uploads")));
 app.use("/api/users", user_router_1.default);

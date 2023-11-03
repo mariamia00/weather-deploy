@@ -24,8 +24,15 @@ app.use(
 
 const UserModel = mongoose.model("User", UserSchema);
 
-app.get("/", (req: any, res: any) => {
-  res.sendFile(path.join(__dirname, "../frontend/dist/weather/index.html"));
+// Serve static files from the Angular dist directory
+app.use(express.static(path.join(__dirname, "../../frontend/dist/weather/")));
+
+// Define a catch-all route that serves your Angular app's index.html
+app.get("*", (req, res) => {
+  const filePath = res.sendFile(
+    path.join(__dirname, "../../frontend/dist/weather/index.html")
+  );
+  console.log("Serving file from path:", filePath);
 });
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
