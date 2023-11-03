@@ -13,7 +13,7 @@ router.use(auth);
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "..", "uploads"));
+    cb(null, path.join(__dirname, "../../src/uploads"));
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
@@ -114,7 +114,11 @@ router.delete(
       // Delete associated comments
       await Comment.deleteMany({ post: postId });
 
-      const imagePath = path.join(__dirname, "..", "uploads", post.imageUrl);
+      const imagePath = path.join(
+        __dirname,
+        "../../src/uploads",
+        post.imageUrl
+      );
 
       if (fs.existsSync(imagePath)) {
         // Delete the image file

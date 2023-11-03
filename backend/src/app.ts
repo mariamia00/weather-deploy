@@ -37,7 +37,7 @@ app.get("*", (req, res) => {
   );
 });
 
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "../src/uploads")));
 app.use("/api/users", userRouter);
 app.use("/api", postRouter);
 app.use("/api", contactRouter);

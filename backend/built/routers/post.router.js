@@ -52,7 +52,7 @@ var router = express_1.default.Router();
 router.use(auth_mid_1.default);
 var storage = multer_1.default.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path_1.default.join(__dirname, "..", "uploads"));
+        cb(null, path_1.default.join(__dirname, "../../src/uploads"));
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname);
@@ -166,7 +166,7 @@ router.delete("/images/:postId", (0, express_async_handler_1.default)(function (
             case 3:
                 // Delete associated comments
                 _a.sent();
-                imagePath = path_1.default.join(__dirname, "..", "uploads", post.imageUrl);
+                imagePath = path_1.default.join(__dirname, "../../src/uploads", post.imageUrl);
                 if (fs_1.default.existsSync(imagePath)) {
                     // Delete the image file
                     fs_1.default.unlinkSync(imagePath);

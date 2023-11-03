@@ -33,7 +33,7 @@ app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.get("*", function (req, res) {
     var filePath = res.sendFile(path_1.default.join(__dirname, "../../frontend/dist/weather/index.html"));
 });
-app.use("/uploads", express_1.default.static(path_1.default.join(__dirname, "uploads")));
+app.use("/uploads", express_1.default.static(path_1.default.join(__dirname, "../src/uploads")));
 app.use("/api/users", user_router_1.default);
 app.use("/api", post_router_1.default);
 app.use("/api", contact_router_1.default);
