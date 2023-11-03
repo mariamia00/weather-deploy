@@ -20,6 +20,7 @@ var app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cors_1.default)({
     credentials: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     origin: ["https://crazyweather.onrender.com"],
 }));
 var UserModel = mongoose_1.default.model("User", user_model_1.UserSchema);

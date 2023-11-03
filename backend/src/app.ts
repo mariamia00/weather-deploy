@@ -18,6 +18,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     origin: ["https://crazyweather.onrender.com"],
   })
 );

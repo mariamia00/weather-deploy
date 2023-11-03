@@ -1,8 +1,8 @@
 import { environment } from 'src/environments/environment';
 
 const BASE_URL = environment.production
-  ? 'https://crazyweather.onrender.com'
-  : 'http://localhost:5000';
+  ? 'https://your-backend-domain-on-render.com:10000'
+  : 'http://localhost:3000';
 
 export const USER_LOGIN_URL = BASE_URL + '/api/users/login';
 export const USER_REGISTER_URL = BASE_URL + '/api/users/register';
