@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
-
+import bodyParser from "body-parser";
 import cors from "cors";
 import userRouter from "./routers/user.router";
 import { dbConnect } from "./database.config";
@@ -27,6 +27,8 @@ const UserModel = mongoose.model("User", UserSchema);
 
 // Serve static files from the Angular dist directory
 app.use(express.static(path.join(__dirname, "../../frontend/dist/weather/")));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Define a catch-all route that serves your Angular app's index.html
 app.get("*", (req, res) => {
