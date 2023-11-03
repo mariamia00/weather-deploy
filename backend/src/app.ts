@@ -24,14 +24,8 @@ app.use(
 
 const UserModel = mongoose.model("User", UserSchema);
 
-app.use(express.static(path.join(__dirname, "frontend", "dist", "weather")));
-
-// Handle other routes
-app.get("*", (req: any, res: any) => {
-  // Serve the Angular "index.html" for all other routes
-  res.sendFile(
-    path.join(__dirname, "frontend", "dist", "weather", "index.html")
-  );
+app.get("/", (req: any, res: any) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist/weather/index.html"));
 });
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
