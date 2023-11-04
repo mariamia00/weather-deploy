@@ -32,14 +32,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Define a catch-all route that serves your Angular app's index.html
 app.get("*", (req, res) => {
-  const filePath = res.sendFile(
-    path.join(__dirname, "../../frontend/dist/weather/index.html")
-  );
+  res.sendFile(path.join(__dirname, "../../frontend/dist/weather/index.html"));
 });
 
 app.use("/uploads", express.static(path.join(__dirname, "../src/uploads")));
 app.use("/api/users", userRouter);
 app.use("/api", postRouter);
+path.join;
 app.use("/api", contactRouter);
 app.use("/api/comments", commentRouter);
 
