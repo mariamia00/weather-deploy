@@ -33,6 +33,7 @@ app.use("/api", postRouter);
 app.use("/api", contactRouter);
 app.use("/api/comments", commentRouter);
 
+app.use("/uploads", express.static(path.join(__dirname, "../src/uploads")));
 // Serve your Angular static files
 app.use(express.static(path.join(__dirname, "../../frontend/dist/weather/")));
 
@@ -40,8 +41,6 @@ app.use(express.static(path.join(__dirname, "../../frontend/dist/weather/")));
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../../frontend/dist/weather/index.html"));
 });
-
-app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
