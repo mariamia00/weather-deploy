@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'worldmap', component: WorldMapComponent },
-  { path: 'uyw', component: UywComponent, canActivate: [AuthGuard] },
+  { path: 'uyw', component: UywComponent },
   { path: 'login', component: LoginComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'register', component: RegisterComponent },
