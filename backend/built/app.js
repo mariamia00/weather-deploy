@@ -1,9 +1,7 @@
 "use strict";
-var __importDefault =
-  (this && this.__importDefault) ||
-  function (mod) {
-    return mod && mod.__esModule ? mod : { default: mod };
-  };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
@@ -21,13 +19,11 @@ var comments_router_1 = __importDefault(require("./routers/comments.router"));
 (0, database_config_1.dbConnect)();
 var app = (0, express_1.default)();
 app.use(express_1.default.json());
-app.use(
-  (0, cors_1.default)({
+app.use((0, cors_1.default)({
     credentials: true,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     origin: ["https://crazyweather.onrender.com"],
-  })
-);
+}));
 var UserModel = mongoose_1.default.model("User", user_model_1.UserSchema);
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
@@ -36,22 +32,13 @@ app.use("/api", post_router_1.default);
 app.use("/api", contact_router_1.default);
 app.use("/api/comments", comments_router_1.default);
 // Serve your Angular static files
-app.use(
-  express_1.default.static(
-    path_1.default.join(__dirname, "../../frontend/dist/weather/")
-  )
-);
+app.use(express_1.default.static(path_1.default.join(__dirname, "../../frontend/dist/weather/")));
 // Catch-all route to serve Angular's index.html
 app.get("*", function (req, res) {
-  res.sendFile(
-    path_1.default.join(__dirname, "../../frontend/dist/weather/index.html")
-  );
+    res.sendFile(path_1.default.join(__dirname, "../../frontend/dist/weather/index.html"));
 });
-app.use(
-  "/uploads",
-  express_1.default.static(path_1.default.join(__dirname, "../src/uploads"))
-);
+app.use("/uploads", express_1.default.static(path_1.default.join(__dirname, "/uploads")));
 var port = process.env.PORT || 5000;
 app.listen(port, function () {
-  console.log("website served on http://localhost:" + port);
+    console.log("website served on http://localhost:" + port);
 });
