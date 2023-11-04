@@ -28,7 +28,6 @@ const UserModel = mongoose.model("User", UserSchema);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use("/uploads", express.static(path.join(__dirname, "../src/uploads")));
 app.use("/api/users", userRouter);
 app.use("/api", postRouter);
 app.use("/api", contactRouter);
