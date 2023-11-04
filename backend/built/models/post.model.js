@@ -38,6 +38,10 @@ var imageSchema = new mongoose_1.default.Schema({
         ref: "User",
         required: true,
     },
+    createdAt: {
+        type: Date,
+        default: Date.now, // Set the default value to the current timestamp
+    },
     comments: [
         {
             type: mongoose_1.Schema.Types.ObjectId,

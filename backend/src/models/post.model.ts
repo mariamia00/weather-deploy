@@ -22,6 +22,10 @@ const imageSchema: Schema = new mongoose.Schema({
     ref: "User", // Reference to the User model
     required: true,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now, // Set the default value to the current timestamp
+  },
   comments: [
     {
       type: Schema.Types.ObjectId,

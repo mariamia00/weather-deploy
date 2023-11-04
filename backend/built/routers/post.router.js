@@ -90,16 +90,19 @@ router.post("/images", upload.single("image"), (0, express_async_handler_1.defau
         }
     });
 }); }));
-// GET route to retrieve all images
+// GET route to retrieve all posts
 router.get("/images", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var images, imagesWithAuthors, validImagesWithAuthors, error_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 3, , 4]);
-                return [4 /*yield*/, post_model_1.default.find({}, "_id title imageUrl author comments").populate("comments")];
+                return [4 /*yield*/, post_model_1.default.find({}, "_id title imageUrl author comments createdAt").populate("comments")];
             case 1:
                 images = _a.sent();
+                images.sort(function (a, b) {
+                    return b.createdAt.getTime() - a.createdAt.getTime();
+                });
                 return [4 /*yield*/, Promise.all(images.map(function (image) { return __awaiter(void 0, void 0, void 0, function () {
                         var author;
                         return __generator(this, function (_a) {

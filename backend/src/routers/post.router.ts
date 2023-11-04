@@ -50,13 +50,18 @@ router.post(
   })
 );
 
-// GET route to retrieve all images
+// GET route to retrieve all posts
 router.get("/images", async (req: Request, res: Response) => {
   try {
     const images = await Image.find(
       {},
-      "_id title imageUrl author comments"
+      "_id title imageUrl author comments createdAt"
     ).populate("comments");
+
+    images.sort(
+      (a, b) =>
+        (b.createdAt as Date).getTime() - (a.createdAt as Date).getTime()
+    );
 
     // Iterate through the images and fetch author names
     const imagesWithAuthors = await Promise.all(
