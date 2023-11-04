@@ -31,7 +31,6 @@ export class UywComponent implements OnInit {
 
   ngOnInit() {
     const userData = localStorage.getItem('User');
-    console.log(POST_URL);
     if (userData) {
       const user = JSON.parse(userData);
       this.userName = user.name;

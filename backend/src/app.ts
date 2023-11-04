@@ -25,22 +25,24 @@ app.use(
 
 const UserModel = mongoose.model("User", UserSchema);
 
-// Serve static files from the Angular dist directory
-app.use(express.static(path.join(__dirname, "../../frontend/dist/weather/")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Define a catch-all route that serves your Angular app's index.html
+app.use("/uploads", express.static(path.join(__dirname, "../src/uploads")));
+app.use("/api/users", userRouter);
+app.use("/api", postRouter);
+app.use("/api", contactRouter);
+app.use("/api/comments", commentRouter);
+
+// Serve your Angular static files
+app.use(express.static(path.join(__dirname, "../../frontend/dist/weather/")));
+
+// Catch-all route to serve Angular's index.html
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../../frontend/dist/weather/index.html"));
 });
 
 app.use("/uploads", express.static(path.join(__dirname, "../src/uploads")));
-app.use("/api/users", userRouter);
-app.use("/api", postRouter);
-path.join;
-app.use("/api", contactRouter);
-app.use("/api/comments", commentRouter);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {

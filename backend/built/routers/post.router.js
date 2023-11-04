@@ -60,36 +60,60 @@ var storage = multer_1.default.diskStorage({
 });
 var upload = (0, multer_1.default)({ storage: storage });
 // POST route to upload an image and title
-router.post("/images", upload.single("image"), (0, express_async_handler_1.default)(function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var title, imageUrl, newImage, error_1;
+router.get("/images", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var images, imagesWithAuthors, validImagesWithAuthors, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                if (!req.file) {
-                    return [2 /*return*/, res.status(400).json({ error: "No file uploaded" })];
-                }
-                title = req.body.title;
-                imageUrl = req.file.path;
-                newImage = new post_model_1.default({
-                    title: title,
-                    imageUrl: req.file.filename,
-                    author: req.user.id,
-                });
-                return [4 /*yield*/, newImage.save()];
+                _a.trys.push([0, 3, , 4]);
+                return [4 /*yield*/, post_model_1.default.find({}, "_id title imageUrl author comments").populate("comments")];
             case 1:
-                _a.sent();
-                res.status(200).json({ message: "Image saved successfully" });
-                return [3 /*break*/, 3];
+                images = _a.sent();
+                return [4 /*yield*/, Promise.all(images.map(function (image) { return __awaiter(void 0, void 0, void 0, function () {
+                        var author;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, user_model_1.UserModel.findById(image.author)];
+                                case 1:
+                                    author = _a.sent();
+                                    if (author) {
+                                        return [2 /*return*/, {
+                                                _id: image._id,
+                                                title: image.title,
+                                                imageUrl: image.imageUrl,
+                                                authorName: author.name,
+                                                author: author._id,
+                                            }];
+                                    }
+                                    else {
+                                        return [2 /*return*/, null]; // Handle the case where the author is not found
+                                    }
+                                    return [2 /*return*/];
+                            }
+                        });
+                    }); }))];
             case 2:
+                imagesWithAuthors = _a.sent();
+                validImagesWithAuthors = imagesWithAuthors.filter(function (image) { return image !== null; });
+                // Check if there are valid images to return
+                if (validImagesWithAuthors.length > 0) {
+                    // Send the list of images with author names as a JSON response
+                    res.json(validImagesWithAuthors);
+                }
+                else {
+                    // If there are no images found, return a 404 JSON response
+                    res.status(404).json({ error: "Not Found" });
+                }
+                return [3 /*break*/, 4];
+            case 3:
                 error_1 = _a.sent();
                 console.error(error_1);
                 res.status(500).json({ error: "Internal server error" });
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
     });
-}); }));
+}); });
 // GET route to retrieve all images
 router.get("/images", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var images, imagesWithAuthors, validImagesWithAuthors, error_2;
