@@ -39,15 +39,12 @@ export class RegisterComponent {
 
   submit() {
     this.isSubmitted = true;
-    if (this.registerForm.invalid) return;
     const fv = this.registerForm.value;
-
     if (fv.password.length < 8) {
-      this.toastrService.error(
-        'Password is too short. Use at least 8 characters.'
-      );
+      this.toastrService.error('Password must be at least 8 characters.');
       return;
     }
+    if (this.registerForm.invalid) return;
 
     const user: UserRegister = {
       name: fv.name,
