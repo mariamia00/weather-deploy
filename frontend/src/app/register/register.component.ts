@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { UserRegister } from '../interfaces/UserRegister';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,8 @@ export class RegisterComponent {
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +41,14 @@ export class RegisterComponent {
     this.isSubmitted = true;
     if (this.registerForm.invalid) return;
     const fv = this.registerForm.value;
+
+    if (fv.password.length < 8) {
+      this.toastrService.error(
+        'Password is too short. Use at least 8 characters.'
+      );
+      return;
+    }
+
     const user: UserRegister = {
       name: fv.name,
       email: fv.email,
