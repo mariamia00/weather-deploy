@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
 import * as L from 'leaflet';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-world-map',
@@ -8,7 +9,22 @@ import * as L from 'leaflet';
   styleUrls: ['./world-map.component.css'],
 })
 export class WorldMapComponent implements OnInit {
-  constructor(private weatherService: WeatherService) {}
+  constructor(
+    private weatherService: WeatherService,
+    private titleService: Title,
+    private meta: Meta
+  ) {
+    this.titleService.setTitle('Crazy weather worldwide heatmap');
+    this.meta.updateTag({
+      name: 'description',
+      content: 'Crazy weather heatmap, worldwide map weather, temperature map',
+    });
+    this.meta.updateTag({
+      name: 'keywords',
+      content:
+        'crazy weather temperature, weather map, worldwide weather, heatmap weather, crazy weather map, search weather on map worldwide',
+    });
+  }
   map!: L.Map;
   searchCity!: string;
 

@@ -10,12 +10,12 @@
   </div>
 
   <!-- * weather for one city, one day -->
-  <div class="bg-light p-4 my-4 rounded-3 shadow justify-content-left">
+  <div class="bg-light p-4 my-4 rounded-3 shadow">
     <p>Now checking weather for {{ WeatherData.name }}</p>
     <hr />
     <div class="row">
-      <div class="col-md-3 d-flex flex-column">
-        <div id="divWeatherMain" class="d-flex flex-column">
+      <div class="col-12 col-md-3 col-sm-4 d-flex flex-column">
+        <div id="divWeatherMain" class="d-flex flex-column p-3">
           <div *ngIf="WeatherData.isDay" class="weatherWidgetRow">
             <i class="fas fa-3x fa-sun sun"></i>
           </div>
@@ -53,7 +53,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-9">
+      <div class="col-12 col-md-9 flex-column">
         <div id="divWeatherDetails" class="bg-primary rounded-3 p-3 h-100">
           <h4>
             More about weather in {{ WeatherData.name }} ({{
@@ -141,7 +141,7 @@
                 <p>
                   Precipitation:
                   {{ forecast.rain ? forecast.rain["3h"] + " mm" : "0" }}
-                  ({{ forecast.pop * 100 }}%)
+                  ({{ calcPercentForecast(forecast) }}%)
                 </p>
                 <p>{{ forecast.weather[0].description }}</p>
                 <p>Humidity: {{ forecast.main.humidity }}%</p>

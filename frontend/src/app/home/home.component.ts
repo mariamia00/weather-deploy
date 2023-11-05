@@ -157,7 +157,9 @@ export class HomeComponent implements OnInit {
     // Calculate precipitation percentage
     const percentage = (rain1h / thresholdMM) * 100;
 
+    const roundedPercentage = parseFloat(percentage.toFixed(1));
+
     // Ensure the percentage is capped at 100%
-    return percentage > 100 ? 100 : percentage;
+    return roundedPercentage > 100 ? 100 : roundedPercentage;
   }
 }

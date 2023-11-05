@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { UserService } from '../services/user.service';
 import { CommentsService } from '../services/comments.service';
 import { catchError, throwError } from 'rxjs';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-uyw',
@@ -26,8 +27,24 @@ export class UywComponent implements OnInit {
     private toastrService: ToastrService,
     private http: HttpClient,
     private userService: UserService,
-    private commentService: CommentsService
-  ) {}
+    private commentService: CommentsService,
+    private titleService: Title,
+    private meta: Meta
+  ) {
+    this.titleService.setTitle(
+      'Crazy weather uyw, upload your weather, post your weather, weather community'
+    );
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        'Crazy weather community posts, worldwide weather posts, weather community, post your weather',
+    });
+    this.meta.updateTag({
+      name: 'keywords',
+      content:
+        'crazy weather forecast, uyw, weather forecast, worldwide weather, heatmap weather, crazy weather, targu jiu weather',
+    });
+  }
 
   ngOnInit() {
     const userData = localStorage.getItem('User');

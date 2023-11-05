@@ -1,8 +1,6 @@
 #divWeatherMain {
   display: block;
   border-radius: 10px;
-  width: 280px;
-  height: 260px;
   background: rgb(0, 0, 0);
   background: linear-gradient(
     180deg,
