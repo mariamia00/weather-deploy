@@ -16,9 +16,9 @@ import { DatePipe } from '@angular/common';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { AuthInterceptor } from './guard/auth.interceptor';
 import { FooterComponent } from './footer/footer.component';
-import { UywModule } from './uyw/uyw.module';
-import { AboutModule } from './about/about.module';
 import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+import { UywComponent } from './uyw/uyw.component';
 
 const routes: Routes = [];
 
@@ -27,7 +27,9 @@ const routes: Routes = [];
     AppComponent,
     NavbarComponent,
     HomeComponent,
+    AboutComponent,
     WorldMapComponent,
+    UywComponent,
     ContactComponent,
     LoginComponent,
     RegisterComponent,
@@ -40,8 +42,6 @@ const routes: Routes = [];
     HttpClientModule,
     FormsModule,
     LeafletModule,
-    UywModule,
-    AboutModule,
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
