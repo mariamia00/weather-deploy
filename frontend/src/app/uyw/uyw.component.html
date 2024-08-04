@@ -40,7 +40,13 @@
               />
             </div>
             <div class="text-center mt-3">
-              <button type="submit" class="btn btn-primary">Upload</button>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="isLoading"
+              >
+                {{ isLoading ? "Creating post..." : "Upload" }}
+              </button>
             </div>
           </form>
         </div>

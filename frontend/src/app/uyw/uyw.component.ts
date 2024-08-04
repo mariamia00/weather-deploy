@@ -21,6 +21,7 @@ export class UywComponent implements OnInit {
   isCollapsed: boolean = false;
   newComment!: string;
   comments: any[] = [];
+  isLoading: boolean = false; // Add this line
 
   constructor(
     private toastrService: ToastrService,
@@ -96,6 +97,7 @@ export class UywComponent implements OnInit {
       this.toastrService.error('Please select both image and title');
       return;
     }
+    this.isLoading = true; // Set loading state to true
 
     const formData = new FormData();
     formData.append('image', this.selectedImage);
@@ -109,11 +111,13 @@ export class UywComponent implements OnInit {
           this.toastrService.error(
             'Failed to upload post. Please try again later.'
           );
+          this.isLoading = true;
           return throwError(error);
         })
       )
       .subscribe((response) => {
         this.toastrService.success('Post successfully uploaded');
+        this.isLoading = false;
         this.loadPosts(); // Refresh the list after uploading a new post
       });
   }
