@@ -32,10 +32,10 @@ app.use("/api", post_router_1.default);
 app.use("/api", contact_router_1.default);
 app.use("/api/comments", comments_router_1.default);
 // Serve your Angular static files
-app.use(express_1.default.static(path_1.default.join(__dirname, "../../frontend/dist/weather/")));
+app.use(express_1.default.static(path_1.default.join(__dirname, "../../../frontend/dist/weather/")));
 // Catch-all route to serve Angular's index.html
 app.get("*", (req, res) => {
-    res.sendFile(path_1.default.join(__dirname, "../../frontend/dist/weather/index.html"));
+    res.sendFile(path_1.default.join(__dirname, "../../../frontend/dist/weather/index.html"));
 });
 const port = process.env.PORT || 5000;
 app.listen(port, () => {

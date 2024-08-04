@@ -34,11 +34,15 @@ app.use("/api", contactRouter);
 app.use("/api/comments", commentRouter);
 
 // Serve your Angular static files
-app.use(express.static(path.join(__dirname, "../../frontend/dist/weather/")));
+app.use(
+  express.static(path.join(__dirname, "../../../frontend/dist/weather/"))
+);
 
 // Catch-all route to serve Angular's index.html
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../frontend/dist/weather/index.html"));
+  res.sendFile(
+    path.join(__dirname, "../../../frontend/dist/weather/index.html")
+  );
 });
 
 const port = process.env.PORT || 5000;
