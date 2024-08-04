@@ -1,0 +1,19 @@
+{
+  "name": "vreme-v2",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=18 <21"
+  },
+  "description": "a wesbite made by beginners for fun. we display 6 day forecast and weathermap",
+  "main": "built/app.js",
+  "scripts": {
+    "dev": "cd frontend && npm start & cd backend && npm start",
+    "start": "cd backend/built && node app.js",
+    "prebuild": "cd backend && npm run build",
+    "build": "cd frontend && npm install && npm run build"
+  },
+  "author": "crazy kids 402",
+  "devDependencies": {
+    "typescript": ">=4.9.3 <5.2"
+  }
+}
