@@ -19,7 +19,7 @@ app.use(
   cors({
     credentials: true,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    origin: ["https://weather-deploy-znwd.onrender.com"],
+    origin: ["https://weatherwazee.onrender.com"],
   })
 );
 
